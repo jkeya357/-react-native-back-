@@ -5,9 +5,10 @@ import verifyJWT from "../middleware/auth.middleware.js"
 const router = express.Router()
 
 router.use(verifyJWT)
-router.post("/", bookController.createBook)
-router.get("/", bookController.getBooks)
-router.delete("/:id", bookController.deleteBook)
-router.get("/user", bookController.getRecommended)
+router.route("/books")
+.post("/", bookController.createBook)
+.get("/", bookController.getBooks)
+.delete("/:id", bookController.deleteBook)
+.get("/user", bookController.getRecommended)
 
 export default router

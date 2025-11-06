@@ -15,8 +15,8 @@ const PORT = process.env.PORT || 3000
 app.use(express.json())
 app.use(cors(corsOptions))
 
-app.use("/api/auth", authRoutes)
-app.use("/api/books", bookRoutes)
+app.use("/api", authRoutes)
+app.use("/api", bookRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is listenin on Port ${PORT}`)
