@@ -19,7 +19,7 @@ const registerUser = async (req,res) => {
       return res.status(400).json({message: "Username must be atleast 3 characters long"})
     }
 
-    //CHECK FOR DUPLICATE PASSWORD
+    //CHECK FOR DUPLICATE User
     const duplicateUser = await User.findOne({email, username})
     if(duplicateUser) return res.status(409).json({message: "User already exists"})
     
