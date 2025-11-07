@@ -10,11 +10,10 @@ import { corsOptions } from "./lib/corsOptions.js"
 
 job.start()
 const app = express()
+app.use(cors(corsOptions))
 const PORT = process.env.PORT || 3000
 
 app.use(express.json())
-app.use(cors(corsOptions))
-
 app.use("/api", authRoutes)
 app.use("/api", bookRoutes)
 

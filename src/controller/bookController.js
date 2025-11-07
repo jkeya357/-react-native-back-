@@ -1,6 +1,7 @@
 import Book from "../models/Book.js"
 import User from "../models/User.js"
 import cloudinary from "../lib/cloudinary.js"
+import { saveBaseImage } from "../middleware/saveImage.js"
 
 const createBook = async (req,res) => {
   try {
@@ -13,15 +14,16 @@ const createBook = async (req,res) => {
     const foundUser = await User.findById(user)
     if(!foundUser) return res.status(404).json({message: "User not found"})
 
-    const uploadRes = await cloudinary.uploader.upload(image)
-    const imageUrl = uploadRes.secure_url
-
+    let imageUrl = null
+    if(image){
+      imageUrl = await saveBaseImage(image, "books")
+    }
     const newBook = new Book({
       title,
       caption,
       rating,
       image: imageUrl,
-      user: foundUser
+      user: foundUser._id
     })
 
     await newBook.save()

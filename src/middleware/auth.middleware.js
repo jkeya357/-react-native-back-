@@ -3,11 +3,11 @@ import jwt from "jsonwebtoken"
 const verifyJWT = async (req,res,next) => {
 
   try {
-    const header = req.header.Authorization
+    const header = req.headers.authorization || req.headers.Authorization
 
-  if(!header?.startsWith("Bearer ")){
-    return res.status(403).json({message: "Unauthorized"})
-  }
+    if(!header?.startsWith("Bearer ")){
+      return res.status(403).json({message: "Unauthorized!!"})
+    }
 
   const token = header.split(" ")[1]
 

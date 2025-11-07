@@ -109,5 +109,17 @@ const login = async (req,res) => {
   }
 }
 
-const authController = {registerUser, login}
+const getUsers = async (req,res) => {
+
+  try {
+    const users = await User.find().select("-password").lean()
+    if(!users) return res.status(204)
+    res.status(200).json(users)
+  } catch (error) {
+    console.log("Error getting the users: ",error)
+    res.status(500).json({message: "Error retrieving the users"})
+  }
+}
+
+const authController = {registerUser, login, getUsers}
 export default authController
