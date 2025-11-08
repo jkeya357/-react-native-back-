@@ -8,6 +8,6 @@ router.use(verifyJWT)
 router.post("/books", bookController.createBook)
 router.get("/books", bookController.getBooks)
 router.delete("/books/:id", bookController.deleteBook)
-router.get("/books/user", bookController.getRecommended)
+router.get("/books/userId", bookController.getRecommended)
 
 export default router

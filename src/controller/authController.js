@@ -32,7 +32,8 @@ const registerUser = async (req,res) => {
       email,
       username,
       password: hashPwd,
-      profileImage: profiAPI
+      profileImage: profiAPI,
+      createdAt: newUser.createdAt
     })
 
     await newUser.save()
@@ -100,7 +101,8 @@ const login = async (req,res) => {
       user:{
         id: foundUser._id,
         username: foundUser.email,
-        profileImage: foundUser.profileImage
+        profileImage: foundUser.profileImage,
+        createdAt: foundUser.createdAt
       }
     })
   } catch (error) {
