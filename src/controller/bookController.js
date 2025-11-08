@@ -64,7 +64,7 @@ const getBooks = async (req,res) => {
 const deleteBook = async (req,res) => {
 
   try {
-    const {_id} = req.params || req.body
+    const _id = req.params.id || req.body._id
 
     const foundBook = await Book.findById(_id)
 
@@ -76,7 +76,7 @@ const deleteBook = async (req,res) => {
 
     if(!foundUser) return res.status(404).json({message: "User not found"})
 
-    if(foundBook.user.toString() !== foundUser.toString()){
+    if(foundBook.user.toString() !== req.userId){
       return res.status(403).json({message: "Unauthorized"})
     }
 
